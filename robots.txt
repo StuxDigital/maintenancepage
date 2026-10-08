@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maintenancepage.stux.digital/sitemap.xml
