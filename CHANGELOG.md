@@ -5,6 +5,12 @@ All notable changes to maintenancepage are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2026-10-09
+
+### Changed
+
+- The progress steps row sizes itself to however many steps there are (shared stylesheet, matching clientpage and soonpage, which now have five). This page's four repair steps look the same
+
 ## [1.0.4] - 2026-10-09
 
 ### Changed
