@@ -1,0 +1,27 @@
+{
+    "name": "Stux.Digital Maintenance Page",
+    "short_name": "Maintenance",
+    "description": "This Stux.Digital site is down for maintenance and will be back online shortly.",
+    "start_url": "/",
+    "display": "browser",
+    "background_color": "#0b1218",
+    "theme_color": "#38bdf8",
+    "icons": [
+        {
+            "src": "/assets/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

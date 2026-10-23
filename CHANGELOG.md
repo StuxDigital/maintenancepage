@@ -5,6 +5,20 @@ All notable changes to maintenancepage are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Date Versioning](https://datevers.ing) since v26.10.23 (`YY.MM.DD`, the UTC release date, with `-1`, `-2`… for later releases the same day); earlier releases used [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v26.10.23-1
+
+### Added
+
+- A full icon set: `favicon.ico` (16, 32 and 48px) and `apple-touch-icon.png` at the site root, and a `site.webmanifest` with 192px, 512px and maskable icons, all made from the Stux.Digital icon, so the page has a proper icon in browser tabs, bookmarks and on phone home screens (the home-screen icons sit on a white background, as iOS would otherwise fill the icon's transparent corners with black). Every page, the 404 page included, lists the same icons in its `<head>`
+- Discord link previews: sharing any page in Discord shows a custom preview in the Stux.Digital brand colour, with the page's name, what it is and a few links (the maintenance page links to Stux.Digital's own sites; the other pages link back home). Names and descriptions show as plain text, and the 404 page has none. They're pre-built into each page's `<head>` by `python scripts/build-head-tags.py`
+- `bash tests/run.sh`, which runs the version check and then checks the Discord previews (valid JSON, under Discord's 3,000 bytes, none on the 404 page), the icon set and every page's `<head>` tags
+
+### Changed
+
+- The tab icon is the new `favicon.ico` on every page, in place of the icons loaded from the brand's media host
+- `scripts/build-sitemap.py` now runs `scripts/build-head-tags.py` after regenerating the sitemap page
+- The local dev server serves `site.webmanifest` as `application/manifest+json`, the way GitHub Pages does
+
 ## v26.10.23
 
 ### Added

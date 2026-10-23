@@ -2,6 +2,8 @@
 """Regenerate sitemap.xml, sitemap/index.html and robots.txt for this static site.
 
 Run from anywhere: python scripts/build-sitemap.py
+It then runs scripts/build-head-tags.py, so the new sitemap page gets its own icon tags and
+Discord preview rather than the copies of legal.html's it was built from.
 The page list is PAGES below; each page's <lastmod> is the date of the last git commit that
 touched its source file (left out if the file has no history yet). URLs always use the site's
 production address, from CNAME. The HTML page reuses the Boring Legal Stuff hub as its layout.
@@ -10,6 +12,7 @@ Copyright (c) 2026 Stux.Group. All rights reserved. Stux.Digital is operated by 
 """
 import html
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -86,6 +89,7 @@ def main():
     (ROOT / "sitemap" / "index.html").write_text(build_html(title), encoding="utf-8", newline="\n")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {BASE_URL}/sitemap.xml\n", encoding="utf-8", newline="\n")
     print(f"Wrote sitemap.xml, sitemap/index.html and robots.txt for {BASE_URL} ({len(PAGES)} pages)")
+    subprocess.run([sys.executable, str(ROOT / "scripts" / "build-head-tags.py")], check=True)
 
 
 if __name__ == "__main__":
