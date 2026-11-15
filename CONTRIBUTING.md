@@ -24,7 +24,7 @@ GitHub Pages does (`/legal` → `legal.html`, the 404 page for missing paths) th
 else `%LOCALAPPDATA%\Programs\PHP\7.4\php.exe`, else `php`). DEV_MODE is on by default: the router
 answers `/assets/dev-mode.js` with `window.SITE_DEV_MODE = true`, so every page shows the dev
 banner, and `?banner=soon,maintenance,site` previews the other banners. Pass `--no-dev-mode` to see
-the page exactly as production does.
+the page exactly as production does. `--lan` listens on all interfaces instead of `127.0.0.1` only, so a phone or tablet on the same network can open the site; the script prints the addresses to try (usually the `192.168.x.x` one), and you may need to allow PHP through the firewall.
 
 ## Project conventions
 
@@ -61,9 +61,12 @@ The icon tags and the Discord link preview in each page's `<head>` (between the 
 
 Run `bash tests/run.sh` before every release. It needs Python 3 (and PHP 7.4 for the dev-server checks, which are skipped without it). It checks the version (`tests/version.sh`), that every page's Discord preview is valid, under 3,000 bytes and up to date (and that the 404 page has none), and that the icon set is complete and every page's `<head>` lists it.
 
-## Branches
+## Branches and going live
 
-Work happens on `test` (or a branch off it), never on `main`. Changes reach `main` only through a pull request from `test`, which needs CI to pass and is reviewed and merged by Leo; the release commit and tag are made on `test` (`git push origin test --tags`) and go live when the pull request is merged.
+- **`main` is what's live.** Nothing is pushed to it directly: it only changes when a pull request from `staging` is merged, and it needs CI to pass.
+- **`staging` is the last check before live.** It only changes when a pull request from `test` is merged. It isn't deployed anywhere of its own; deploys stay on `main`.
+- **Work happens on `test`**, or on a feature branch off `test` that's merged back into it. Releases are made on `test` too; `commit.sh` / `commit.bat` refuse to run on `staging` or `main`.
+- **Going live:** push `test` with its tag (`git push origin test --tags`), open a pull request into staging (`gh pr create --base staging --head test`), check staging once it's merged, then open one from staging into main (`gh pr create --base main --head staging`). Leo reviews and merges both.
 
 ## Versioning
 
